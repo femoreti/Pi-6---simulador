@@ -10,25 +10,38 @@ public class Asteroid : MonoBehaviour
     public float initialVelocity;
     public Text dataText;
     public Transform earth;
-    public bool debug;
 
     Rigidbody2D rb;
     float maxVelocity = 0;
     float maxDistance = 0, minDistance = 0;
 
-	// Use this for initialization
-	void Start ()
+    Vector2 initialPos;
+
+    bool canStart = false;
+
+    private void Awake()
     {
+        initialPos = transform.position;
+    }
+
+    // Use this for initialization
+    public void Init ()
+    {
+        gameObject.SetActive(true);
         Vector3 dir = Quaternion.AngleAxis(initialRot, Vector3.forward) * Vector3.left;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = (dir*initialVelocity);
         transform.eulerAngles = new Vector3(0, 0, initialRot);
         minDistance = Vector2.Distance(transform.position, earth.transform.position);
 
+        canStart = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (!canStart)
+            return;
+
         if (rb.velocity.magnitude > maxVelocity)
             maxVelocity = rb.velocity.magnitude;
 
@@ -40,8 +53,11 @@ public class Asteroid : MonoBehaviour
         if(dataText != null)
             GetData();
 
-        if (dist < 10)
-            Destroy(gameObject);
+        if (dist < 50)
+        {
+            gameObject.SetActive(false);
+            //OnReset();
+        }
 	}
 
     public void GetData()
@@ -61,5 +77,16 @@ public class Asteroid : MonoBehaviour
             maxVelocity, earth.GetComponent<Rigidbody2D>().mass, rb.mass, initialVelocity, angleEntrance, maxDistance, minDistance);
 
         dataText.text = strResult;
+    }
+
+    public void OnReset()
+    {
+        transform.position = initialPos;
+        canStart = false;
+        rb.velocity = Vector2.zero;
+
+        maxVelocity = 0;
+        maxDistance = 0;
+        minDistance = 0;
     }
 }

@@ -8,8 +8,13 @@ public class Attractor : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public bool canSimulate = false;
+
     private void FixedUpdate()
     {
+        if (!canSimulate)
+            return;
+
         Attractor[] attractorList = FindObjectsOfType<Attractor>();
         foreach (Attractor attractor in attractorList)
         {
