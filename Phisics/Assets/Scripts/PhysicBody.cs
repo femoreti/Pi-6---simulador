@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class PhysicBody : MonoBehaviour
 {
-    public Vector3D Position;
-    public Vector3D Velocity;
-    public Vector3D Acceleration;
-    public float Mass;
-    public Vector3D Gravity;
-    public Vector3D SumForces;
+    public bool isKinematic;
 
-    public Vector3D getSumForces()
+    public Vector3 velocity;
+    public Vector3 acceleration;
+    public float mass;
+    public Vector3 gravity;
+    private Vector3 sumForces;
+
+    private void FixedUpdate()
     {
-        return this.SumForces;
+        if (isKinematic)
+            return;
+
+        transform.Translate(new Vector3(acceleration.x * Time.fixedDeltaTime, acceleration.y * Time.fixedDeltaTime, acceleration.z * Time.fixedDeltaTime));
     }
 
-    public PhysicBody(Vector3D position, Vector3D velocity, Vector3D acceleration, float mass, Vector3D gravity)
+    public void AddForceMethod(Vector3 force)
     {
-        this.Position = position;
-        this.Velocity = velocity;
-        this.Acceleration = acceleration;
-        this.Mass = mass;
-        this.Gravity = gravity;
-    }
-    public void AddForceMethod(Vector3D force)
-    {
-        this.SumForces += force;
-        this.Acceleration = this.SumForces / this.Mass;
+        this.sumForces += force * Time.deltaTime;
+        this.acceleration = this.sumForces / this.mass;
     }
 }
