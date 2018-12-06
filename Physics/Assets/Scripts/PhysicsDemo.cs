@@ -18,11 +18,11 @@ public class PhysicsDemo : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            teste.AddForceMethod(new Vector3(0, 0, 10));
+            teste.AddForce(new Vector3(0, 0, 10));
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            teste.AddForceMethod(new Vector3(0, 0, -100));
+            teste.AddForce(new Vector3(0, 0, -100));
         }
 
         //teste.transform.Translate(new Vector3(teste.acceleration.x * Time.deltaTime,

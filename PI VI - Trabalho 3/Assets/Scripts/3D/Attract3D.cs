@@ -6,13 +6,13 @@ public class Attract3D : MonoBehaviour {
     //6,67408 × 10-11
     const float G = 6.67408f;
 
-    public Rigidbody rb;
+    private PhysicBody rb;
 
     public bool canSimulate = false;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<PhysicBody>();
     }
 
     private void FixedUpdate()
@@ -23,16 +23,16 @@ public class Attract3D : MonoBehaviour {
         Attract3D[] attractorList = FindObjectsOfType<Attract3D>();
         foreach (Attract3D attractor in attractorList)
         {
-            if (attractor != this)
+            if (attractor != this && attractor.enabled)
                 Attract(attractor);
         }
     }
 
     void Attract(Attract3D objToAttract)
     {
-        Rigidbody rbToAttract = objToAttract.rb;
+        PhysicBody rbToAttract = objToAttract.rb;
 
-        Vector3 direction = rb.position - rbToAttract.position;
+        Vector3 direction = rb.transform.position - rbToAttract.transform.position;
         float distance = direction.magnitude;
 
         if (distance == 0f)
@@ -40,7 +40,8 @@ public class Attract3D : MonoBehaviour {
 
         float forceMagnitude = G * (rb.mass * rbToAttract.mass) / Mathf.Pow(distance, 2);
         Vector3 force = direction.normalized * forceMagnitude;
+        transform.rotation = Quaternion.LookRotation(-direction.normalized, Vector3.up);
 
-        rbToAttract.AddForce(force);
+        rbToAttract.AddRelativeForce(force);
     }
 }

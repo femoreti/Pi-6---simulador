@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Controller : MonoBehaviour {
 
     public Asteroid3D asteroid;
+    public GameObject UI;
 
     [Header("UI - Asteroid")]
     public Slider _asteroidsCount;
@@ -27,18 +28,30 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Alpha1))
+		
+	}
+
+    public void OnClickInit()
+    {
+        for (int i = 0; i < _asteroidsCount.value; i++)
         {
             Asteroid3D ast = Instantiate(asteroid.gameObject).GetComponent<Asteroid3D>();
-            ast.init();
+
+            float rMass = Random.Range(1, _asteroidsMass.value);
+            float rDist = Random.Range(10f, _asteroidsDistance.value);
+            float rSpeed = Random.Range(100f, _asteroidsSpeed.value);
+
+            ast.init(rMass, rDist, rSpeed);
         }
-	}
+
+        UI.SetActive(false);
+    }
 
     public void OnResetUI()
     {
         _txtAsteroidsCount.text = _asteroidsCount.value.ToString("00");
         _txtAsteroidsSpeed.text = _asteroidsSpeed.value.ToString("00");
-        _txtAsteroidsMass.text = _asteroidsMass.value.ToString("000");
+        _txtAsteroidsMass.text = _asteroidsMass.value.ToString("00");
         _txtAsteroidsDistance.text = _asteroidsDistance.value.ToString("00");
     }
 

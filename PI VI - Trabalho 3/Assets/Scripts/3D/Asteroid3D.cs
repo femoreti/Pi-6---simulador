@@ -9,21 +9,21 @@ public class Asteroid3D : MonoBehaviour
     public float _initialDistance;
 
     GameObject sun;
-    Rigidbody rb;
+    PhysicBody rb;
 
 	// Use this for initialization
-	public void init ()
+	public void init (float p_mass, float p_dist, float p_speed)
     {
         sun = GameObject.FindGameObjectWithTag("Sun");
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<PhysicBody>();
         transform.eulerAngles = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 
-        _initialMass = Random.Range(1f, 10f);
-        _initialDistance = Random.Range(10f, 40f);
-        _initialSpeed = Random.Range(500f, 1000f);
+        _initialMass = p_mass;
+        _initialDistance = p_dist;
+        _initialSpeed = p_speed;
 
         rb.mass = _initialMass;
-        rb.AddRelativeForce(Vector3.forward * _initialSpeed);
+        rb.AddRelativeForce(Vector3.forward * (_initialSpeed * 10));
 
         transform.position = RandomCircle(sun.transform.position, _initialDistance);
     }
