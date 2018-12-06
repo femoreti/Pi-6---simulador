@@ -793,10 +793,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1348749060}
   m_HandleRect: {fileID: 1186143151}
   m_Direction: 0
-  m_MinValue: 10
-  m_MaxValue: 100
+  m_MinValue: 50
+  m_MaxValue: 300
   m_WholeNumbers: 1
-  m_Value: 10
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -943,7 +943,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a338b6262c7425f44a9fc0f41bae9c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroid: {fileID: 114940419485127806, guid: 7631dca8dcda065448ec102c90b2567f, type: 2}
+  asteroid:
+  - {fileID: 114940419485127806, guid: 7631dca8dcda065448ec102c90b2567f, type: 2}
+  - {fileID: 114599379329111618, guid: 2e638845db66b3540bab20fd2c845490, type: 2}
+  - {fileID: 114105961298985890, guid: d4b3231618c03a94ba5df2b23e0696a3, type: 2}
+  - {fileID: 114609056799339612, guid: 72fddec932998b448a78c9ea9fdbaec1, type: 2}
+  - {fileID: 114465990580526552, guid: 5a175a1eae1b386479caf75bc7b1df3a, type: 2}
   Planet: {fileID: 114154069080673662, guid: f28727562e0f420459a52b8ed967f8ab, type: 2}
   UI: {fileID: 1483984895}
   _asteroidsCount: {fileID: 174607171}
@@ -2025,7 +2030,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: eb49872e905f54e448dfb6cb88d6cd02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2060,7 +2065,7 @@ Transform:
   m_GameObject: {fileID: 1506646914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1

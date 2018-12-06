@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour {
 
-    public Object3D asteroid, Planet;
+    public Object3D[] asteroid;
+    public Object3D Planet;
     public GameObject UI;
 
     [Header("UI - Asteroid")]
@@ -36,10 +37,10 @@ public class Controller : MonoBehaviour {
         int i;
         for (i = 0; i < _asteroidsCount.value; i++)
         {
-            Object3D ast = Instantiate(asteroid.gameObject).GetComponent<Object3D>();
+            Object3D ast = Instantiate(asteroid[Random.Range(0, asteroid.Length)].gameObject).GetComponent<Object3D>();
 
             float rMass = Random.Range(1, _asteroidsMass.value);
-            float rDist = Random.Range(10f, _asteroidsDistance.value);
+            float rDist = Random.Range(50f, _asteroidsDistance.value);
             float rSpeed = Random.Range(-_asteroidsSpeed.value, _asteroidsSpeed.value);
 
             ast.init(rMass, rDist, rSpeed);
@@ -51,7 +52,9 @@ public class Controller : MonoBehaviour {
 
             float rMass = Random.Range(50, 300);
             float rDist = Random.Range(250f, 700f);
-            float rSpeed = Random.Range(-600f, 600f);
+            float rSpeed = Random.Range(-300f, 300f);
+
+            ast.GetComponent<MeshRenderer>().material.color = new Color32((byte)(Random.value * 255f), (byte)(Random.value * 255f), (byte)(Random.value * 255f), (byte)255f);
 
             ast.init(rMass, rDist, rSpeed);
         }
