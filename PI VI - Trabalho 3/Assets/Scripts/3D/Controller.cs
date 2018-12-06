@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour {
 
-    public Asteroid3D asteroid;
+    public Object3D asteroid, Planet;
     public GameObject UI;
 
     [Header("UI - Asteroid")]
@@ -33,13 +33,25 @@ public class Controller : MonoBehaviour {
 
     public void OnClickInit()
     {
-        for (int i = 0; i < _asteroidsCount.value; i++)
+        int i;
+        for (i = 0; i < _asteroidsCount.value; i++)
         {
-            Asteroid3D ast = Instantiate(asteroid.gameObject).GetComponent<Asteroid3D>();
+            Object3D ast = Instantiate(asteroid.gameObject).GetComponent<Object3D>();
 
             float rMass = Random.Range(1, _asteroidsMass.value);
             float rDist = Random.Range(10f, _asteroidsDistance.value);
-            float rSpeed = Random.Range(100f, _asteroidsSpeed.value);
+            float rSpeed = Random.Range(-_asteroidsSpeed.value, _asteroidsSpeed.value);
+
+            ast.init(rMass, rDist, rSpeed);
+        }
+
+        for (i = 0; i < 15; i++)
+        {
+            Object3D ast = Instantiate(Planet.gameObject).GetComponent<Object3D>();
+
+            float rMass = Random.Range(50, 300);
+            float rDist = Random.Range(250f, 700f);
+            float rSpeed = Random.Range(-600f, 600f);
 
             ast.init(rMass, rDist, rSpeed);
         }

@@ -8,7 +8,7 @@ public class Attract3D : MonoBehaviour {
 
     private PhysicBody rb;
 
-    public bool canSimulate = false;
+    public bool canSimulate = true;
 
     private void Start()
     {
@@ -36,7 +36,10 @@ public class Attract3D : MonoBehaviour {
         float distance = direction.magnitude;
 
         if (distance == 0f)
+        {
+            
             return;
+        }
 
         float forceMagnitude = G * (rb.mass * rbToAttract.mass) / Mathf.Pow(distance, 2);
         Vector3 force = direction.normalized * forceMagnitude;

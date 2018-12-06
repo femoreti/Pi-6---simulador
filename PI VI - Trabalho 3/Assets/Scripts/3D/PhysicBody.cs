@@ -43,14 +43,32 @@ public class PhysicBody : MonoBehaviour
     {
         //Debug.Log("add force " + force);
         this.sumForces += force * Time.deltaTime;
-        this.accelerationRelative = this.sumForces / this.mass;
+        this.accelerationRelative = this.sumForces / 1;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        acceleration = Vector3.zero;
-        accelerationRelative = Vector3.zero;
-        velocity = Vector3.zero;
-        sumForces = Vector3.zero;
+        //acceleration = Vector3.zero;
+        //accelerationRelative = Vector3.zero;
+        //velocity = Vector3.zero;
+        //sumForces = Vector3.zero;
+
+        PhysicBody pb = collision.gameObject.GetComponent<PhysicBody>();
+
+        if (pb != null)
+        {
+            DestroyObject(pb);
+        }
+    }
+
+    bool DestroyObject(PhysicBody attractObj)
+    {
+        if (GetComponent<PhysicBody>().mass < attractObj.mass)
+        {
+            Destroy(gameObject);
+            return true;
+        }
+
+        return false;
     }
 }
