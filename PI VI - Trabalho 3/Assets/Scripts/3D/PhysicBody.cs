@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ public class PhysicBody : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         this.sumForces += force * Time.deltaTime;
-        this.acceleration = this.sumForces / 1;
+        this.acceleration = this.sumForces / mass;
 
         velocity += acceleration;
     }
@@ -43,7 +43,7 @@ public class PhysicBody : MonoBehaviour
     {
         //Debug.Log("add force " + force);
         this.sumForces += force * Time.deltaTime;
-        this.accelerationRelative = this.sumForces / 1;
+        this.accelerationRelative = this.sumForces / mass;
     }
 
     private void OnCollisionEnter(Collision collision)
