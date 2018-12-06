@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PhysicBody))]
 public class Attract3D : MonoBehaviour {
     //6,67408 × 10-11
     const float G = 6.67408f;
@@ -10,7 +11,7 @@ public class Attract3D : MonoBehaviour {
 
     public bool canSimulate = true;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<PhysicBody>();
     }

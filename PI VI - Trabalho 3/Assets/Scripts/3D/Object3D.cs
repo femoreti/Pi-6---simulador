@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(Attract3D))]
 public class Object3D : MonoBehaviour
 {
