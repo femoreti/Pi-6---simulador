@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 590129407}
   - component: {fileID: 590129406}
   - component: {fileID: 590129405}
+  - component: {fileID: 590129408}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -711,12 +712,25 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 590129404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -173.5}
+  m_LocalPosition: {x: 0, y: 100.3, z: -51.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &590129408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 590129404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e955cef1c6d025748bba4c264c2d6db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 30
+  camZoomSpeed: 150
 --- !u!1 &686619442
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +965,7 @@ MonoBehaviour:
   - {fileID: 114465990580526552, guid: 5a175a1eae1b386479caf75bc7b1df3a, type: 2}
   Planet: {fileID: 114154069080673662, guid: f28727562e0f420459a52b8ed967f8ab, type: 2}
   UI: {fileID: 1483984895}
+  _objs: []
   _asteroidsCount: {fileID: 174607171}
   _txtAsteroidsCount: {fileID: 2026165519}
   _asteroidsSpeed: {fileID: 1715555328}

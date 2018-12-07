@@ -47,4 +47,5 @@ public class Object3D : MonoBehaviour
         pos.z = center.z + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
         return pos;
     }
+    
 }

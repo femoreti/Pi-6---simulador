@@ -65,10 +65,16 @@ public class PhysicBody : MonoBehaviour
     {
         if (GetComponent<PhysicBody>().mass < attractObj.mass)
         {
+            OnRemoveObj();
             Destroy(gameObject);
             return true;
         }
 
         return false;
+    }
+
+    public void OnRemoveObj()
+    {
+        Controller.instance._objs.Remove(this);
     }
 }

@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Controller : MonoBehaviour {
+    public static Controller instance;
 
     public Object3D[] asteroid;
     public Object3D Planet;
     public GameObject UI;
+    public List<PhysicBody> _objs = new List<PhysicBody>();
+
+    private int currentObj = 0;
 
     [Header("UI - Asteroid")]
     public Slider _asteroidsCount;
@@ -22,18 +26,48 @@ public class Controller : MonoBehaviour {
     public Slider _asteroidsDistance;
     public Text _txtAsteroidsDistance;
 
+    CameraScript cam;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Use this for initialization
     void Start () {
         OnResetUI();
+        cam = Camera.main.GetComponent<CameraScript>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+		if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentObj++;
+            if (currentObj > _objs.Count-1)
+                currentObj = 0;
+
+            cam.OnSetTarget(_objs[currentObj].transform);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentObj--;
+            if (currentObj < 0)
+                currentObj = _objs.Count - 1;
+
+            while(currentObj > _objs.Count - 1)
+                currentObj = _objs.Count - 1;
+
+            cam.OnSetTarget(_objs[currentObj].transform);
+        }
+    }
 
     public void OnClickInit()
     {
+        _objs.Clear();
+        currentObj = 0;
+        _objs.Add(GameObject.FindWithTag("Sun").GetComponent<PhysicBody>());
+
         int i;
         for (i = 0; i < _asteroidsCount.value; i++)
         {
@@ -44,6 +78,7 @@ public class Controller : MonoBehaviour {
             float rSpeed = Random.Range(-_asteroidsSpeed.value, _asteroidsSpeed.value);
 
             ast.init(rMass, rDist, rSpeed);
+            _objs.Add(ast.GetComponent<PhysicBody>());
         }
 
         for (i = 0; i < 15; i++)
@@ -57,8 +92,10 @@ public class Controller : MonoBehaviour {
             ast.GetComponent<MeshRenderer>().material.color = new Color32((byte)(Random.value * 255f), (byte)(Random.value * 255f), (byte)(Random.value * 255f), (byte)255f);
 
             ast.init(rMass, rDist, rSpeed);
+            _objs.Add(ast.GetComponent<PhysicBody>());
         }
 
+        cam.OnInit();
         UI.SetActive(false);
     }
 
