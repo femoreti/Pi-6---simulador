@@ -12,8 +12,20 @@ public class Object3D : MonoBehaviour
     GameObject sun;
     PhysicBody rb;
 
-	// Use this for initialization
-	public void init (float p_mass, float p_dist, float p_speed)
+
+    //velocity
+    Vector3 lastPos;
+    public float minDist {
+        get; set;
+    }
+    public float maxDist
+    {
+        get;set;
+    }
+
+
+    // Use this for initialization
+    public void init (float p_mass, float p_dist, float p_speed)
     {
         sun = GameObject.FindGameObjectWithTag("Sun");
         rb = GetComponent<PhysicBody>();
@@ -27,6 +39,9 @@ public class Object3D : MonoBehaviour
         rb.AddRelativeForce(Vector3.forward * (_initialSpeed * 10));
 
         transform.position = RandomCircle(sun.transform.position, _initialDistance);
+        lastPos = transform.position;
+
+        minDist = 999999;
     }
 	
 	// Update is called once per frame
@@ -48,4 +63,27 @@ public class Object3D : MonoBehaviour
         return pos;
     }
     
+    public float getVelocity
+    {
+        get
+        {
+            return rb.accelerationRelative.magnitude;
+        }
+    }
+
+    public float getDist
+    {
+        get
+        {
+            float dist = (sun.transform.position - this.transform.position).magnitude;
+
+            if (dist < minDist)
+                minDist = dist;
+
+            if (dist > maxDist)
+                maxDist = dist;
+
+            return dist;
+        }
+    }
 }

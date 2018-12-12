@@ -8,8 +8,10 @@ public class PhysicBody : MonoBehaviour
 
     [HideInInspector]
     public Vector3 velocity;
-    Vector3 acceleration;
-    Vector3 accelerationRelative;
+    [HideInInspector]
+    public Vector3 acceleration;
+    [HideInInspector]
+    public Vector3 accelerationRelative;
     public float mass = 1;
     private Vector3 sumForces;
 
@@ -44,6 +46,8 @@ public class PhysicBody : MonoBehaviour
         //Debug.Log("add force " + force);
         this.sumForces += force * Time.deltaTime;
         this.accelerationRelative = this.sumForces / mass;
+
+        velocity += accelerationRelative;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -75,6 +79,6 @@ public class PhysicBody : MonoBehaviour
 
     public void OnRemoveObj()
     {
-        Controller.instance._objs.Remove(this);
+        Controller.instance._objs.Remove(this.gameObject);
     }
 }

@@ -6,7 +6,7 @@ public class CameraScript : MonoBehaviour {
 
     private Transform target;
     public float scrollSpeed = 15f;
-    public float camZoomSpeed = 75f;
+    public float camZoomSpeed = 75f, camMoveSpeed = 25f;
 
     Vector3 newPos = Vector3.zero, startPos;
 
@@ -23,7 +23,7 @@ public class CameraScript : MonoBehaviour {
         OnSetTarget(GameObject.FindWithTag("Sun").transform);
 
         transform.position = startPos;
-        float distance = 350f;
+        float distance = 250f;
         newPos = -(transform.forward * distance) + target.position;
 
         started = true;
@@ -54,10 +54,10 @@ public class CameraScript : MonoBehaviour {
         
         if(Input.GetMouseButton(0))
         {
-            float rotationX = Input.GetAxis("Mouse X") * -camZoomSpeed;
+            float rotationX = Input.GetAxis("Mouse X") * -camMoveSpeed;
             transform.RotateAround(target.position, Vector3.up, rotationX);
 
-            float rotationY = Input.GetAxis("Mouse Y") * camZoomSpeed;
+            float rotationY = Input.GetAxis("Mouse Y") * camMoveSpeed;
             transform.RotateAround(target.position, Vector3.right, rotationY);
 
 
