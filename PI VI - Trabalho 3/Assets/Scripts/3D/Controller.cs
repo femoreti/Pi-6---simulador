@@ -144,6 +144,9 @@ public class Controller : MonoBehaviour {
         }
 
         _objs.Clear();
+
+        if (cam != null)
+            cam.transform.position = new Vector3(0, 115, -550);
     }
 
     //Sliders
